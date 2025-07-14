@@ -11,57 +11,48 @@ type TokenPayload = {
 const UpdateClient = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [formData, setFormData] = useState({
-//    login: '',
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    // address: '',
-    // postalCode: ''
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   // Получаем login из токена
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
-//console.log("Token:", token);
-//console.log("Login from token:", loginFromToken);
 
   // Получаем данные текущего фермера
   useEffect(() => {
     if (!token || !loginFromToken) return;
 
-    fetch(`http://localhost:8080/client/getClientByLogin/${loginFromToken}`, {
+    //fetch(`http://localhost:8080/client/getClientByLogin/${loginFromToken}`, {
+    fetch(`${baseURL}/client/getClientByLogin/${loginFromToken}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then(async res => {
         const data = await res.json();
-        console.log('data',data)
+        console.log('data', data)
         if (!res.ok) throw new Error(data.message || 'Failed to fetch client');
-        //setFormData(data);
         setFormData({
-  firstName: data._firstName || '',
-  lastName: data._lastName || '',
-  email: data._email || '',
-  phone: data._phone || '',
-//   address: data._address || '',
-//   postalCode: data._postalCode || '',
-});
-        console.log('formData',formData)
-})
+          firstName: data._firstName || '',
+          lastName: data._lastName || '',
+          email: data._email || '',
+          phone: data._phone || '',
+        });
+        console.log('formData', formData)
+      })
       .catch(err => {
         setError(err.message);
-        //setError('Fetch not OK');
       });
   }, [token, loginFromToken]);
 
-
-useEffect(() => {
-  // formData обновился
-  console.log('formData changed:', formData);
-}, [formData]);
+  useEffect(() => {
+    console.log('formData changed:', formData);
+  }, [formData]);
 
   // Обработка изменений формы
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +70,8 @@ useEffect(() => {
     console.log('!!!')
 
     try {
-      const res = await fetch(`http://localhost:8080/client/update`, {
+      //const res = await fetch(`http://localhost:8080/client/update`, {
+      const res = await fetch(`${baseURL}/client/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -13,6 +13,7 @@ const RemoveClient = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
 
@@ -20,7 +21,8 @@ const RemoveClient = () => {
     setError(null);
     setSuccess(null);
     try {
-      const res = await fetch(`http://localhost:8080/client/remove`, {
+      //const res = await fetch(`http://localhost:8080/client/remove`, {
+        const res = await fetch(`${baseURL}/client/remove`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

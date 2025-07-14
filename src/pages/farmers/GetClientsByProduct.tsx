@@ -9,6 +9,7 @@ const GetClientsByProduct = () => {
     const [product, setProduct] = useState('');
     const [clients, setClients] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const baseURL = import.meta.env.VITE_API_URL;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProduct(e.target.value);
@@ -25,7 +26,8 @@ const GetClientsByProduct = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:8080/farmer/getClientsByProduct/${product}`, {
+            //const res = await fetch(`http://localhost:8080/farmer/getClientsByProduct/${product}`, {
+            const res = await fetch(`${baseURL}/farmer/getClientsByProduct/${product}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -58,11 +60,11 @@ const GetClientsByProduct = () => {
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
             {clients.length > 0 && (
                 <div className="mt-4">
-                    {/* </div><div className="row" style={{ width: "90%", marginLeft: '5%'}}> */}
+                   
                     <h4 style={{ textAlign: 'center' }} >Farmers producing "{product}"</h4>
                     <Row>
                         {clients.map((client, idx) => (
-                            // <Card key={idx} className="mb-3">
+                           
                             <Col md={6} sm={12} key={idx} className="mb-3">
                                 <Card>
                                     <Card.Body>
@@ -72,9 +74,7 @@ const GetClientsByProduct = () => {
                                             <li><b>Last Name:</b> {client._lastName}</li>
                                             <li><b>Email:</b> {client._email}</li>
                                             <li><b>Phone:</b> {client._phone}</li>
-                                            {/* <li><b>Address:</b> {farmer._address}</li>
-                                            <li><b>Postal Code:</b> {farmer._postalCode}</li> */}
-                                            {/* <li><b>Role:</b> {farmer._role}</li> */}
+                                            
                                         </ul>
                                     </Card.Body>
                                 </Card>

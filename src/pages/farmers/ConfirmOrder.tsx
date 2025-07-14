@@ -8,6 +8,7 @@ const ConfirmOrder = () => {
   const [bagName, setBagName] = useState('');
   const [bag, setBag] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBagName(e.target.value);
@@ -24,7 +25,8 @@ const ConfirmOrder = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/confirmOrder/${bagName}`, {
+      // const res = await fetch(`http://localhost:8080/farmer/confirmOrder/${bagName}`, {
+      const res = await fetch(`${baseURL}/farmer/confirmOrder/${bagName}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,

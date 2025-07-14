@@ -7,6 +7,7 @@ import { Form, Button, Container, Alert, Row, Col } from 'react-bootstrap';
 const Register = () => {
   const role = useSelector((state: RootState) => state.role.role);
   const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_API_URL; // Assuming you have set this in your .env file
 
   const [formData, setFormData] = useState({
     login: '',
@@ -34,9 +35,10 @@ const Register = () => {
     setMessage(null);
     setError(null);
 
-    const url = role === 'farmer'
-      ? 'http://localhost:8080/farmer/register'
-      : 'http://localhost:8080/client/register';
+    // const url = role === 'farmer'
+    //   ? 'http://localhost:8080/farmer/register'
+    //   : 'http://localhost:8080/client/register';
+    const url = role === 'farmer' ? `${baseURL}/farmer/register` : `${baseURL}/client/register`;
 
     // Отбираем нужные поля по роли
     const { login, password, firstName, lastName, email, phone, address, postalCode } = formData;

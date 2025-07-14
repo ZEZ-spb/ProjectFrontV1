@@ -8,6 +8,7 @@ const GetClientByLogin = () => {
   const [login, setLogin] = useState('');
   const [client, setClient] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
@@ -24,7 +25,8 @@ const GetClientByLogin = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/client/getClientByLogin/${login}`, {
+      //const res = await fetch(`http://localhost:8080/client/getClientByLogin/${login}`, {
+      const res = await fetch(`${baseURL}/client/getClientByLogin/${login}`, {  
         headers: {
           Authorization: `Bearer ${token}`,
         },

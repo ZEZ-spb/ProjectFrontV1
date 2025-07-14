@@ -19,6 +19,7 @@ const RemoveBag = () => {
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
 
@@ -38,7 +39,8 @@ const RemoveBag = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/removeBag/${formData.bagName}`, {
+      //const res = await fetch(`http://localhost:8080/farmer/removeBag/${formData.bagName}`, {
+      const res = await fetch(`${baseURL}/farmer/removeBag/${formData.bagName}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

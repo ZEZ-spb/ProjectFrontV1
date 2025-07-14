@@ -20,9 +20,11 @@ const AllFarmers = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [farmers, setFarmers] = useState<FarmerDto[]>([]);
   const [loading, setLoading] = useState(true);
+  const baseURL = import.meta.env.VITE_API_URL; // Assuming you have set this in your .env file
 
   useEffect(() => {
-    fetch("http://localhost:8080/farmer/getAllFarmers", {
+    //fetch("http://localhost:8080/farmer/getAllFarmers", {
+      fetch(`${baseURL}/farmer/getAllFarmers`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

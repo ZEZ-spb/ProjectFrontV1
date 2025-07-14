@@ -11,7 +11,7 @@ type TokenPayload = {
 const UpdateFarmer = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [formData, setFormData] = useState({
-//    login: '',
+
     firstName: '',
     lastName: '',
     email: '',
@@ -21,47 +21,47 @@ const UpdateFarmer = () => {
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL; // Assuming you have set this in your .env file
 
   // Получаем login из токена
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
-//console.log("Token:", token);
-//console.log("Login from token:", loginFromToken);
 
   // Получаем данные текущего фермера
   useEffect(() => {
     if (!token || !loginFromToken) return;
 
-    fetch(`http://localhost:8080/farmer/getFarmerByLogin/${loginFromToken}`, {
+    //fetch(`http://localhost:8080/farmer/getFarmerByLogin/${loginFromToken}`, {
+    fetch(`${baseURL}/farmer/getFarmerByLogin/${loginFromToken}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then(async res => {
         const data = await res.json();
-        console.log('data',data)
+        console.log('data', data)
         if (!res.ok) throw new Error(data.message || 'Failed to fetch farmer');
-        //setFormData(data);
+
         setFormData({
-  firstName: data._firstName || '',
-  lastName: data._lastName || '',
-  email: data._email || '',
-  phone: data._phone || '',
-  address: data._address || '',
-  postalCode: data._postalCode || '',
-});
-        console.log('formData',formData)
-})
+          firstName: data._firstName || '',
+          lastName: data._lastName || '',
+          email: data._email || '',
+          phone: data._phone || '',
+          address: data._address || '',
+          postalCode: data._postalCode || '',
+        });
+        console.log('formData', formData)
+      })
       .catch(err => {
         setError(err.message);
-        //setError('Fetch not OK');
+
       });
   }, [token, loginFromToken]);
 
 
-useEffect(() => {
-  // formData обновился
-  console.log('formData changed:', formData);
-}, [formData]);
+  useEffect(() => {
+    // formData обновился
+    console.log('formData changed:', formData);
+  }, [formData]);
 
   // Обработка изменений формы
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +79,8 @@ useEffect(() => {
     console.log('!!!')
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/update`, {
+      //const res = await fetch(`http://localhost:8080/farmer/update`, {
+      const res = await fetch(`${baseURL}/farmer/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -123,5 +124,5 @@ useEffect(() => {
 };
 
 export default UpdateFarmer;
-  
+
 

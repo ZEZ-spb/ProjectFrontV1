@@ -8,6 +8,7 @@ const GetFarmerByLogin = () => {
   const [login, setLogin] = useState('');
   const [farmer, setFarmer] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
@@ -24,7 +25,8 @@ const GetFarmerByLogin = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/getFarmerByLogin/${login}`, {
+      //const res = await fetch(`http://localhost:8080/farmer/getFarmerByLogin/${login}`, {
+      const res = await fetch(`${baseURL}/farmer/getFarmerByLogin/${login}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

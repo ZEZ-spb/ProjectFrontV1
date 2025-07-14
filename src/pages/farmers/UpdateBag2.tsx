@@ -18,6 +18,7 @@ const UpdateBag2 = () => {
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL; // Assuming you have set this in your .env file
 
   // Получаем login из токена
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
@@ -26,7 +27,8 @@ const UpdateBag2 = () => {
   useEffect(() => {
     if (!token || !loginFromToken) return;
 
-    fetch(`http://localhost:8080/farmer/getOwnBagByName/${bagName}`, {
+    //fetch(`http://localhost:8080/farmer/getOwnBagByName/${bagName}`, {
+      fetch(`${baseURL}/farmer/getOwnBagByName/${bagName}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -69,7 +71,8 @@ useEffect(() => {
     console.log('!!!')
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/updateBag/${bagName}/`, {
+      //const res = await fetch(`http://localhost:8080/farmer/updateBag/${bagName}/`, {
+        const res = await fetch(`${baseURL}/farmer/updateBag/${bagName}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

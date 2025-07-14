@@ -9,6 +9,7 @@ const GetBagsByFarmer = () => {
     const [login, setLogin] = useState('');
     const [bags, setBags] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const baseURL = import.meta.env.VITE_API_URL;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLogin(e.target.value);
@@ -25,7 +26,8 @@ const GetBagsByFarmer = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:8080/farmer/getBagsByFarmer/${login}`, {
+            //const res = await fetch(`http://localhost:8080/farmer/getBagsByFarmer/${login}`, {
+            const res = await fetch(`${baseURL}/farmer/getBagsByFarmer/${login}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -60,7 +62,7 @@ const GetBagsByFarmer = () => {
 
             {bags.length > 0 && (
                 <div className="mt-4">
-                    {/* </div><div className="row" style={{ width: "90%", marginLeft: '5%'}}> */}
+                    
                     <h4 style={{ textAlign: 'center' }} >Bags producing by {login}</h4>
                     <Row>
                         {bags.map((bag, idx) => (

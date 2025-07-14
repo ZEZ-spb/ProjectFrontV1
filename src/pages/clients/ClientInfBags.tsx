@@ -1,14 +1,9 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-//import { useSelector } from "react-redux";
-//import type { RootState } from "../app/store";
 import { useNavigate } from 'react-router-dom';
 
 const ClientInfBags = () => {
     //const role = useSelector((state: RootState) => state.role.role);
     const navigate = useNavigate();
-
-    //getBagsByProduct
-    //getBagsByFarmer
 
     const getBagsByProduct = () => {
     navigate('/farmer/getBagsByProduct');
@@ -17,15 +12,7 @@ const ClientInfBags = () => {
     const getBagsByFarmer = () => {
     navigate('/farmer/getBagsByFarmer');   
     }
-
-    // const getOwnBags = () => {
-    // navigate('/farmer/getOwnBags');
-    // };
-
-    // const getOwnBagsWithOrder = () => {
-    // navigate('/farmer/getOwnBagsWithOrder');
-    // }
-       
+      
     return (
     
         <Container fluid className="mt-5" style={{ maxWidth: '100%' }}>

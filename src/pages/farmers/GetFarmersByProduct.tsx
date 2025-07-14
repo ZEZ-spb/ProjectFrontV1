@@ -9,6 +9,7 @@ const GetFarmersByProduct = () => {
     const [product, setProduct] = useState('');
     const [farmers, setFarmers] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const baseURL = import.meta.env.VITE_API_URL;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProduct(e.target.value);
@@ -25,7 +26,8 @@ const GetFarmersByProduct = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:8080/farmer/getFarmersByProduct/${product}`, {
+            //const res = await fetch(`http://localhost:8080/farmer/getFarmersByProduct/${product}`, {
+            const res = await fetch(`${baseURL}/farmer/getFarmersByProduct/${product}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -58,11 +60,11 @@ const GetFarmersByProduct = () => {
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
             {farmers.length > 0 && (
                 <div className="mt-4">
-                    {/* </div><div className="row" style={{ width: "90%", marginLeft: '5%'}}> */}
+                   
                     <h4 style={{ textAlign: 'center' }} >Farmers producing "{product}"</h4>
                     <Row>
                         {farmers.map((farmer, idx) => (
-                            // <Card key={idx} className="mb-3">
+                           
                             <Col md={6} sm={12} key={idx} className="mb-3">
                                 <Card>
                                     <Card.Body>
@@ -74,7 +76,7 @@ const GetFarmersByProduct = () => {
                                             <li><b>Phone:</b> {farmer._phone}</li>
                                             <li><b>Address:</b> {farmer._address}</li>
                                             <li><b>Postal Code:</b> {farmer._postalCode}</li>
-                                            {/* <li><b>Role:</b> {farmer._role}</li> */}
+                                          
                                         </ul>
                                     </Card.Body>
                                 </Card>

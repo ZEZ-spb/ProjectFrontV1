@@ -21,6 +21,7 @@ const UpdateBag1 = () => {
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
 
@@ -40,7 +41,8 @@ const UpdateBag1 = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/farmer/getOwnBagByName/${formData.bagName}`, {
+      //const res = await fetch(`http://localhost:8080/farmer/getOwnBagByName/${formData.bagName}`, {
+      const res = await fetch(`${baseURL}/farmer/getOwnBagByName/${formData.bagName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

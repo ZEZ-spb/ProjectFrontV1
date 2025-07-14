@@ -1,6 +1,4 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-//import { useSelector } from "react-redux";
-//import type { RootState } from "../app/store";
 import { useNavigate } from 'react-router-dom';
 
 const ClientInfProducts = () => {
@@ -47,8 +45,6 @@ const ClientInfProducts = () => {
                 <Button variant="success" size="lg" style={{ width: '100%', height: '80px'}} onClick={getAllProducts}>Get all products</Button>
               </Col>
             </Form.Group>
-
-
                       
         </Container>
     

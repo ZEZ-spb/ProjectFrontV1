@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../app/store';
 import { Form, Button, Alert, Container } from 'react-bootstrap';
-//import { jwtDecode } from 'jwt-decode';
 
-// type TokenPayload = {
-//   login: string;
-//   role: string;
-// };
 const UpdateClientPassword = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const [formData, setFormData] = useState({
@@ -15,6 +10,7 @@ const UpdateClientPassword = () => {
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   // Получаем login из токена
   //const loginFromToken = token ? (jwtDecode(token) as TokenPayload).login : null;
@@ -33,7 +29,8 @@ const UpdateClientPassword = () => {
 
     try {
         console.log('formData:', formData);
-      const res = await fetch(`http://localhost:8080/client/updatePassword`, {
+      //const res = await fetch(`http://localhost:8080/client/updatePassword`, {
+      const res = await fetch(`${baseURL}/client/updatePassword`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -16,11 +16,13 @@ const GetClientsOrderedBags = () => {
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [clients, setClients] = useState<Customer[]>([])
+    const baseURL = import.meta.env.VITE_API_URL;
 
 useEffect(() => {
   setMessage(null); // сбрасываем сообщение при каждом запросе
   if (!token ) return;
-  fetch(`http://localhost:8080/farmer/getClientsOrderedBags`, {
+  //fetch(`http://localhost:8080/farmer/getClientsOrderedBags`, {
+  fetch(`${baseURL}/farmer/getClientsOrderedBags`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -48,8 +50,6 @@ useEffect(() => {
     });
 }, [token]);
 
-
-
 return (
     <div>
     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
@@ -58,12 +58,10 @@ return (
       <div className="row" style={{ width: "90%", marginLeft: '5%' }}>
         {clients.map((client, idx) => (
           <div
-            // className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4"
+            
             key={idx}
           >
-            <Card 
-            // className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4"
-            >
+            <Card >
               <Card.Body>
                 <ul>
                   <li><b>Login:</b> {client.login}</li>

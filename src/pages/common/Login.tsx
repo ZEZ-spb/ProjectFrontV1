@@ -10,6 +10,7 @@ const Login = () => {
   const role = useSelector((state: RootState) => state.role.role);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_API_URL; // Assuming you have set this in your .env file
 
   const [formData, setFormData] = useState({
     login: '',
@@ -31,13 +32,10 @@ const Login = () => {
     setMessage(null);
     setError(null);
 
-    const url = role === 'farmer'
-      ? 'http://localhost:8080/farmer/login'
-      : 'http://localhost:8080/client/login';
-
-    //const { login, password } = formData;
-
-    //const payload = { login, password };
+    // const url = role === 'farmer'
+    //   ? 'http://localhost:8080/farmer/login'
+    //   : 'http://localhost:8080/client/login';
+    const url = role === 'farmer' ? `${baseURL}/farmer/login` : `${baseURL}/client/login`;
 
     try {
       const response = await fetch(url, {

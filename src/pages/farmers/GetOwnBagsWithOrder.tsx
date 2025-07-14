@@ -19,11 +19,13 @@ const GetOwnBagsWithOrder = () => {
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [bags, setBags] = useState<Bag[]>([])
+    const baseURL = import.meta.env.VITE_API_URL;
 
 useEffect(() => {
   setMessage(null); // сбрасываем сообщение при каждом запросе
   if (!token ) return;
-  fetch(`http://localhost:8080/farmer/getOwnBagsWithOrder`, {
+  //fetch(`http://localhost:8080/farmer/getOwnBagsWithOrder`, {
+  fetch(`${baseURL}/farmer/getOwnBagsWithOrder`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

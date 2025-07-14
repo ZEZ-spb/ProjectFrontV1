@@ -17,6 +17,7 @@ const CancelOrder = () => {
 
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   if (!role) return <Navigate to="/" />;
 
@@ -30,8 +31,9 @@ const CancelOrder = () => {
     setMessage(null);
     setError(null);
 
-    const url = 'http://localhost:8080/client/cancelOrder'
-      
+    //const url = 'http://localhost:8080/client/cancelOrder'
+    const url = `${baseURL}/client/cancelOrder`
+
     try {
       const response = await fetch(url, {
         method: 'PUT',

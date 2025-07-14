@@ -18,6 +18,8 @@ const Payment = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const baseURL = import.meta.env.VITE_API_URL;
+
   if (!role) return <Navigate to="/" />;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +32,8 @@ const Payment = () => {
     setMessage(null);
     setError(null);
 
-    const url = 'http://localhost:8080/client/payment'
+    //const url = 'http://localhost:8080/client/payment'
+    const url = `${baseURL}/client/payment`;
       
     try {
       const response = await fetch(url, {

@@ -9,11 +9,13 @@ const GetAllProducts = () => {
     const [products, setProducts] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
+    const baseURL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         setMessage(null);
         setError(null);
-        fetch("http://localhost:8080/client/getAllProducts", {
+        //fetch("http://localhost:8080/client/getAllProducts", {
+        fetch(`${baseURL}/client/getAllProducts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,8 +43,7 @@ const GetAllProducts = () => {
                 <Card>
                     <Card.Body>
                         {products.map((product, idx) => (
-                            <div
-                                // className="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4"
+                            <div                                
                                 key={idx}
                             >
                                 <ul>

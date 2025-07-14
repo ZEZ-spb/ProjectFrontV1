@@ -1,6 +1,4 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-//import { useSelector } from "react-redux";
-//import type { RootState } from "../app/store";
 import { useNavigate } from 'react-router-dom';
 
 const FarmerInfBags = () => {
@@ -63,10 +61,6 @@ const FarmerInfBags = () => {
             Look at your bag by name</Button>
         </Col>
 
-        {/* <Col md={6}>
-          <Button variant="success" size="lg" style={{ width: '100%', height: '80px' }} onClick={getOwnBagsWithOrder}>
-            Look at your reserved bags</Button>
-        </Col> */}
       </Form.Group>
 
     </Container>

@@ -1,6 +1,4 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-//import { useSelector } from "react-redux";
-//import type { RootState } from "../app/store";
 import { useNavigate } from 'react-router-dom';
 
 const FarmerInfOrders = () => {

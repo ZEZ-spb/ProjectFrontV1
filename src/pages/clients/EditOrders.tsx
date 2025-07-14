@@ -1,6 +1,4 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-//import { useSelector } from "react-redux";
-//import type { RootState } from "../app/store";
 import { useNavigate } from 'react-router-dom';
 
 const EditOrders = () => {
@@ -31,13 +29,7 @@ const EditOrders = () => {
                 <Button variant="success" size="lg" style={{ width: '100%', height: '80px' }} onClick={cancelOrder}>Remove one of your orders</Button>
               </Col>
             </Form.Group>
-
-            {/* <Form.Group as={Row} className="mb-3">
-              <Col md={6}>
-                <Button variant="success" size="lg" style={{ width: '100%', height: '80px'}} onClick={removeBag}>Remove one of your bag</Button>
-              </Col>
-            </Form.Group> */}
-                      
+            
         </Container>
     
       );
